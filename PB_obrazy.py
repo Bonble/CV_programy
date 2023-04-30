@@ -18,7 +18,7 @@ class Okno:
         self.plik2 = 0
         self.wynik = 0
         self.win = tk.Tk()
-        self.win.title('Przemysław Bajkowski - projekt nr 2')
+        self.win.title('PB - Obrazy')
         self.win.geometry("1000x650")
 
             # menu
