@@ -1,4 +1,4 @@
-# Jest to program okienkowy który przetwarza pliki .jpg za pomocą kilkunastu algorytmów, takich jak np. mieszanie
+# Jest to program okienkowy w Pythonie który przetwarza pliki .jpg za pomocą kilkunastu algorytmów, takich jak np. mieszanie
 # dwóch obrazów, wyszukiwanie krawędzi itd. i pozwala je zapisywać na dysk lub do schowków
 
 
