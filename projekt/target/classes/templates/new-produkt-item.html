@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nowy produkt </title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-2">
+      <p><a class="btn btn-outline-success" href="/">
+        <i class="bi bi-arrow-left-square-fill"></i> Wyjdź</a>
+      </p>
+    </div>
+    <div class="col-6">
+      <h2>Dodaj nowy produkt</h2>
+      <form action="#" th:action="@{/produkt}" th:object="${produktItem}" method="POST">
+        <div class="form-group">
+            <label for="nazwa">Nazwa</label>
+            <input class="form-control"
+                   type="text"
+                   th:field="*{nazwa}"
+                   id="nazwa"
+                   placeholder="Nazwa"
+            >
+            <label for="ean">EAN</label>
+            <input class="form-control"
+                   type="number"
+                   step="1"
+                   min="0"
+                   th:field="*{ean}"
+                   id="ean"
+                   placeholder="0"
+            >
+            <label for="ilosc">Ilość</label>
+            <input class="form-control"
+                   type="number"
+                   step="1"
+                   min="0"
+                   th:field="*{ilosc}"
+                   id="ilosc"
+                   placeholder="0"
+            >
+            <label for="typ">Typ</label>
+            <input class="form-control"
+                   type="text"
+                   th:field="*{typ}"
+                   id="typ"
+                   placeholder="Typ"
+            >
+            <label for="cena">Cena</label>
+            <input class="form-control"
+                   type="number"
+                   step=".01"
+                   min="0"
+                   th:field="*{cena}"
+                   id="cena"
+                   placeholder="0.00"
+            >
+            <label for="procent">Procent przeceny</label>
+            <input class="form-control"
+                   type="number"
+                   step="1"
+                   min="0"
+                   max="100"
+                   th:field="*{procent}"
+                   id="procent"
+                   placeholder="0"
+            >
+            <input class="form-check-input"
+                   type="checkbox"
+                   id="inputCzy_jest_przecena"
+                   th:field="*{czy_jest_przecena}"
+                   th:checked="${czy_jest_przecena} == true">
+            <label class="form-check-label" for="inputCzy_jest_przecena">
+              Czy jest przecena?
+            </label>
+          <button type="submit" class="btn btn-outline-success">
+            <i class="bi bi-plus-square-fill"></i> Dodaj produkt
+          </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

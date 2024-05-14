@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zamówienia</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Hurtownia Spożywcza "SpożHurtPol"</h1>
+  <span><a href="/" th:href="@{/logout}">Wyloguj się</a></span>&nbsp;
+  <span><a href="/" th:href="@{/}">Wróć</a></span>
+  <hr />
+  <div th:if="${param.usunieto}">
+    <div class="alert alert-info">Usunięto zamówienie!</div>
+  </div>
+  <div th:if="${param.potwierdzono}">
+    <div class="alert alert-info">Potwierdzono odebranie zamówienia!</div>
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Potwierdź</th>
+      <th>EAN</th>
+      <th>Nazwa</th>
+      <th>Ilość</th>
+      <th>Koszt</th>
+      <th>Data Dostarczenia</th>
+      <th>Usuń</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${zamowienia}" th:class="${item.czy_dostarczono} ? 'alert alert-success' : 'alert alert-warning'">
+      <td>
+        <div th:if="${item.czy_dostarczono} == false">
+          <a class="btn btn-info" th:href="@{/potwierdzZamowKlient/{id}(id=${item.id})}">
+            <i class="bi bi-pencil-fill"></i> Potwierdź</a>
+        </div>
+        <div th:unless="${item.czy_dostarczono} == false"}>
+          <p>Dostarczono</p>
+        </div>
+      </td>
+      <td th:text="${item.produkt_ean.ean}"></td>
+      <td th:text="${item.produkt_ean.nazwa}"></td>
+      <td th:text="${item.ilosc}"></td>
+      <td th:text="${item.koszt}"></td>
+      <td th:text="${item.data_dostarczenia}"></td>
+      <td>
+        <div class="btn btn-group-sm" role="group">
+          <a class="btn btn-danger" th:href="@{/usunZamowKlient/{id}(id=${item.id})}">
+            <i class="bi bi-pencil-fill"></i> Usuń</a>
+        </div>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>

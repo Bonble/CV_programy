@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SpożHurtPol </title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Hurtownia Spożywcza "SpożHurtPol"</h1>
+    <span><a href="/" th:href="@{/login}">Zaloguj się tutaj!</a></span>
+    <hr />
+    <form action="#" th:action="@{/sort/{typ}}"  th:object="${produkt}" method="POST">
+        <div class="form-group">
+            <label for="typ">Sortuj po typie:</label>
+            <select id="typ" name="typ">
+                <option value="Suche">Suche</option>
+                <option value="Napoje">Napoje</option>
+            </select>
+            <button type="submit" class="btn btn-outline-success">
+                <i class="bi bi-plus-square-fill"></i> Sortuj po typie
+            </button>
+        </div>
+    </form>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>EAN</th>
+            <th>Nazwa</th>
+            <th>Czy jest przecena</th>
+            <th>Cena</th>
+            <th>%</th>
+            <th>Typ</th>
+            <th>Data spożycia</th>
+            <th>Data ostatniej zmiany</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${produktItems}" th:class="${item.czy_jest_przecena} ? 'alert alert-success' : 'alert alert-warning'">
+            <td th:text="${item.ean}"></td>
+            <td th:text="${item.nazwa}"></td>
+            <td>
+                <span th:if="${item.czy_jest_przecena} == true" th:text="Tak" />
+                <span th:unless="${item.czy_jest_przecena} == true" th:text="Nie" />
+            </td>
+            <td th:text="${procentHelper.obliczProcent(item.cena, item.czy_jest_przecena, item.procent)}"></td>
+            <td>
+                <span th:if="${item.czy_jest_przecena} == true" th:text=${item.procent} />
+                <span th:unless="${item.czy_jest_przecena} == true" th:text=0 />
+            </td>
+            <td th:text="${item.typ}"></td>
+            <td th:text="${item.data_spozycia}"></td>
+            <td th:text="${item.data_ostatniej_zmiany}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.2.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
